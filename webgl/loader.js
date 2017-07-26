@@ -29,11 +29,13 @@ Framework.components.push(function(framework, gl){
                             .attr('src', path)
                             .load(function(){
                                 count -= 1;
+                                console.info("img " + name)
                                 data[name] = new framework.Texture()
                                     .image(this)
                                     .repeat()
                                     .mipmap();
                                 if(count == 0){
+                                    console.info("framework <img> ready");
                                     self.events.dispatch('ready', data);
                                 }
                             });
@@ -57,11 +59,12 @@ Framework.components.push(function(framework, gl){
                                 alert(data.status);
                             })
                             .done(function(source) {
-                                console.info("done");
+                                console.info("done " + name);
                                 try{
                                     data[name] = new framework.Shader(source, path);
                                     count -= 1;
                                     if(count == 0){
+                                        console.info("framework ready");
                                         self.events.dispatch('ready', data);
                                     }
                                 }
