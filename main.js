@@ -399,31 +399,31 @@ $(function(){
     });
 
     var programs = {
-        display: 'display.shader',
-        simplex: 'simplex3d.shader',
-        normal: 'normal.shader',
-        occlusion: 'occlusion.shader',
-        shadow: 'shadow.shader',
-        shadowmap: 'shadowmap.shader',
-        blur: 'blur.shader',
-        rock: 'rock_texture.png',
-        rock_normals: 'rock2_normals.png',
-        grass: 'grass_material.png',
-        grass_normals: 'grass_normals.png',
+        display: './display.shader',
+        simplex: './simplex3d.shader',
+        normal: './normal.shader',
+        occlusion: './occlusion.shader',
+        shadow: './shadow.shader',
+        shadowmap: './shadowmap.shader',
+        blur: './blur.shader',
+        rock: './rock_texture.png',
+        rock_normals: './rock2_normals.png',
+        grass: './grass_material.png',
+        grass_normals: './grass_normals.png',
 
-        water_diffuse: 'water/diffuse.shader',
-        water_display: 'water/display.shader',
-        water_momentum: 'water/momentum.shader',
-        water_cycle: 'water/cycle.shader',
-        water_normals: 'water/normals.shader',
-        water_shadowmap: 'water/shadowmap.shader',
-        flows: 'flows.shader',
-        god: 'god.shader',
+        water_diffuse: './water/diffuse.shader',
+        water_display: './water/display.shader',
+        water_momentum: './water/momentum.shader',
+        water_cycle: './water/cycle.shader',
+        water_normals: './water/normals.shader',
+        water_shadowmap: './water/shadowmap.shader',
+        flows: './flows.shader',
+        god: './god.shader',
 
-        errode: 'errode.shader',
-        diffuse_soil: 'diffuse_soil.shader',
+        errode: './errode.shader',
+        diffuse_soil: './diffuse_soil.shader',
 
-        copy: 'copy.shader',
+        copy: './copy.shader',
     };
    
     var loader = new framework.Loader()

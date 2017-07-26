@@ -50,7 +50,10 @@ Framework.components.push(function(framework, gl){
                             catch(error){
                                 self.events.dispatch('error', error);
                             }
-                        });
+                        })
+                            .fail(function(data) {
+                                alert(data.status);
+                            });
                         break;
                 }
             });
