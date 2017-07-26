@@ -50,6 +50,15 @@ div.set{
     padding-right: 10px;
 }
 
+#faultcount{
+    width: 20px;
+}
+
+#faultslider{
+    width:100px;
+
+}
+
 #toolstoggle{
     padding-top: 4px;
 }

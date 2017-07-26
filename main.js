@@ -288,8 +288,9 @@ $(function(){
         step: 1
     });
 
-   	$(".hideable").toggle();
-   	
+    $(".hideable").toggle();
+    $(".hideable").toggle();
+
     view = new Viewpoint({
         element: canvas,
         offset: new Vec3(0, 0, 0.0),
