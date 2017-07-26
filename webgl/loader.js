@@ -40,6 +40,7 @@ Framework.components.push(function(framework, gl){
                         break;
                     case 'shader': 
                         $.get(path, function(source){
+/*
                             try{
                                 data[name] = new framework.Shader(source, path);
                                 count -= 1;
@@ -50,9 +51,26 @@ Framework.components.push(function(framework, gl){
                             catch(error){
                                 self.events.dispatch('error', error);
                             }
+*/
                         })
                             .fail(function(data) {
                                 alert(data.status);
+                            })
+                            .done(function(source) {
+                                console.info("done");
+                                try{
+                                    data[name] = new framework.Shader(source, path);
+                                    count -= 1;
+                                    if(count == 0){
+                                        self.events.dispatch('ready', data);
+                                    }
+                                }
+                                catch(error){
+                                    self.events.dispatch('error', error);
+                                }
+                            })
+                            .always(function(data) {
+                                console.info("always");
                             });
                         break;
                 }
