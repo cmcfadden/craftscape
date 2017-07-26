@@ -12,6 +12,7 @@ vertex:
 fragment:
     uniform vec2 viewport;
     uniform float delta;
+    uniform float faultcount;
 
     //
     // Description : Array and textureless GLSL 2D/3D/4D simplex 
@@ -102,14 +103,19 @@ fragment:
       return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1), 
                                     dot(p2,x2), dot(p3,x3) ) );
       }
-    
+
     void main(){
         float h = 0.0;
         vec2 uv = gl_FragCoord.xy/viewport;
-        
+        float delta2 = delta;
+        int faultcount2 = int(faultcount);
+        if (faultcount2 > 0) {
+            float x = floor(uv[0] * float(faultcount2 + 2));
+            delta2 = delta/x;
+        }
         for(int i=0; i<10; i++){
             float factor = pow(2.0, float(i));
-            h += snoise(vec3(uv*factor, delta*float(i+1)))/(pow(factor, 0.88)*10.0);
+            h += snoise(vec3(uv*factor, delta2*float(i+1)))/(pow(factor, 0.88)*10.0);
         }
         gl_FragColor = vec4(0, h, 0.0, 1.0);
     }

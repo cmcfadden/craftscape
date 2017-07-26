@@ -171,13 +171,16 @@ var Terrain = Class({
             'heights': this.heights.result,
             'normals': this.normals.result,
         });
-        this.reset($( "#seedslider" ).slider( "value" ));
- 		$( "#seed" ).val( $( "#seedslider" ).slider( "value" ) );
+        this.reset($( "#seedslider" ).slider( "value" ),$( "#faultslider" ).slider( "value" ));
+        $( "#seed" ).val( $( "#seedslider" ).slider( "value" ) );
+        $( "#faultcount" ).val( $( "#faultslider" ).slider( "value" ) );
     },
-    reset: function(delta) {
-    	this.delta = delta;
+    reset: function(delta, faultcount) {
+        this.delta = delta;
+        this.faultcount = faultcount;
 //        console.log(this.delta);
         this.programs.simplex.set('delta', this.delta);
+        this.programs.simplex.set('faultcount', this.faultcount);
         this.heights.run(this.programs.simplex);
         this.programs.errode.set({
             ground: this.heights.result,
@@ -201,6 +204,7 @@ var Terrain = Class({
                 .set(projection)
                 .set('mousepos', mousepos)
                 .set('delta', Date.now()/1000-start)
+                .set('faultcount', 0)
                 .set('screen', [this.framework.screen.width, this.framework.screen.height])
                 .set('rockfactor', controls.rock * controls.dir)
                 .set('soilfactor', controls.soil * controls.dir)
@@ -252,22 +256,38 @@ $(function(){
 	});
 
     $('#seed').change(function(){
-    	var newseed = parseInt($( "#seed" ).val());
-  		$( "#seedslider" ).slider( 'value', newseed );
-      terrain.reset(newseed);       
+        var newseed = parseInt($( "#seed" ).val());
+        $( "#seedslider" ).slider( 'value', newseed );
+        terrain.reset(newseed, terrain.faultcount);
     });
 
-	$( "#seedslider" ).slider(	{
-		slide: function( event, ui ) {
-			$( "#seed" ).val( ui.value );
-			terrain.reset(ui.value);
-		},
+    $( "#seedslider" ).slider(	{
+        slide: function( event, ui ) {
+            $( "#seed" ).val( ui.value );
+            terrain.reset(ui.value, terrain.faultcount);
+        },
         value:1,
         min: 1,
         max: 1000,
         step: 1
     });
-    
+    $('#faultcount').change(function(){
+        var newfaultcount = parseInt($( "#faultcount" ).val());
+        $( "#faultslider" ).slider( 'value', newfaultcount );
+        terrain.reset(terrain.delta, newfaultcount);
+    });
+
+    $( "#faultslider" ).slider(	{
+        slide: function( event, ui ) {
+            $( "#faultcount" ).val( ui.value );
+            terrain.reset(terrain.delta, ui.value);
+        },
+        value:0,
+        min: 0,
+        max: 10,
+        step: 1
+    });
+
    	$(".hideable").toggle();
    	
     view = new Viewpoint({
