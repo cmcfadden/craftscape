@@ -22,12 +22,10 @@ Framework.components.push(function(framework, gl){
             $.each(data, function(name, path){
                 //count += 1;
                 var extension = path.match(extre)[1];
-
                 switch(extension){
                     case 'jpg': case 'png':
                         console.info("requesting img " + name)
                         var img = $('<img>')
-                            .attr('src', path)
                             .on('load', function() {
                                 if (!this.complete) {
                                     alert('broken image!');
@@ -43,7 +41,8 @@ Framework.components.push(function(framework, gl){
                                         self.events.dispatch('ready', data);
                                     }
                                 }
-                            });
+                            })
+                           .attr('src', path);
                        break;
                     case 'shader': 
                         console.info("requesting shader " + name)
