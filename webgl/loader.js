@@ -25,11 +25,12 @@ Framework.components.push(function(framework, gl){
 
                 switch(extension){
                     case 'jpg': case 'png':
+                   		console.info("requesting img " + name)
                         $('<img>')
                             .attr('src', path)
-                            .load(function(){
+                            .on("load",function() {
                                 count -= 1;
-                                console.info("img " + name)
+                                console.info("done img " + name);
                                 data[name] = new framework.Texture()
                                     .image(this)
                                     .repeat()
@@ -39,8 +40,9 @@ Framework.components.push(function(framework, gl){
                                     self.events.dispatch('ready', data);
                                 }
                             });
-                        break;
+                       break;
                     case 'shader': 
+                   		console.info("requesting shader " + name)
                         $.get(path, function(source){
 /*
                             try{
@@ -55,14 +57,14 @@ Framework.components.push(function(framework, gl){
                             }
 */
                         })
-                            .fail(function(data) {
-                                alert(data.status);
+                            .fail(function(response) {
+                                alert(response.status);
                             })
                             .done(function(source) {
                                 console.info("done " + name);
                                 try{
-                                    data[name] = new framework.Shader(source, path);
                                     count -= 1;
+                                    data[name] = new framework.Shader(source, path);
                                     if(count == 0){
                                         console.info("framework ready");
                                         self.events.dispatch('ready', data);
@@ -73,9 +75,13 @@ Framework.components.push(function(framework, gl){
                                 }
                             })
                             .always(function(data) {
-                                console.info("always");
+                                console.info("always " + path);
                             });
                         break;
+                    default:
+                     	console.info("unknown file type "+ extension);
+                    	count--;
+                    	break;
                 }
             });
             return this;
