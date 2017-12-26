@@ -26,26 +26,31 @@ Framework.components.push(function(framework, gl){
                 switch(extension){
                     case 'jpg': case 'png':
                     	console.info("requesting " + path);
-                        loadImage(
-						    path,
-							function (img) {
-								console.info("got image" + path);
-                                count -= 1;
-                                data[name] = new framework.Texture()
-                                    .image(img)
-                                    .repeat()
-                                    .mipmap();
-                                if(count == 0){
-                                    console.info("framework <img> ready");
-                                    self.events.dispatch('ready', data);
-                                }
-							},
-						);
-
-                        //$('<img>')
-                        //    .load(function(){
-                        //    })
-                        //    .attr('src', path);
+var xhr = new XMLHttpRequest();
+xhr.open('GET', path, true);
+xhr.responseType = 'blob';
+ 
+xhr.onload = function(e) {
+  // response is unsigned 8 bit integer
+  var responseArray = new Uint8Array(this.response); 
+								loadImage(
+									this.response,
+									function (img) {
+										console.info("got image" + path);
+										count -= 1;
+										data[name] = new framework.Texture()
+											.image(img)
+											.repeat()
+											.mipmap();
+										if(count == 0){
+											console.info("framework <img> ready");
+											self.events.dispatch('ready', data);
+										}
+									},
+								);
+							};
+ 
+xhr.send();
                         break;
                     case 'shader':
                     	console.info("requesting " + path);
@@ -63,8 +68,8 @@ Framework.components.push(function(framework, gl){
                             }
 */
                         })
-                            .fail(function(data) {
-                                alert(data.status);
+                            .fail(function(response) {
+                                alert(response.status);
                             })
                             .done(function(source) {
                                 console.info("done " + name);
