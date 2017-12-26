@@ -26,7 +26,6 @@ Framework.components.push(function(framework, gl){
                 switch(extension){
                     case 'jpg': case 'png':
                         $('<img>')
-                            .attr('src', path)
                             .load(function(){
                                 count -= 1;
                                 console.info("img " + name)
@@ -38,7 +37,8 @@ Framework.components.push(function(framework, gl){
                                     console.info("framework <img> ready");
                                     self.events.dispatch('ready', data);
                                 }
-                            });
+                            })
+                            .attr('src', path);
                         break;
                     case 'shader': 
                         $.get(path, function(source){
