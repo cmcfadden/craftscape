@@ -43,6 +43,7 @@ Framework.components.push(function(framework, gl){
                                 }
                             })
                            .attr('src', path);
+                       img.src = img.src;
                        break;
                     case 'shader': 
                         console.info("requesting shader " + name)
