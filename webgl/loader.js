@@ -25,24 +25,28 @@ Framework.components.push(function(framework, gl){
 
                 switch(extension){
                     case 'jpg': case 'png':
-                   		console.info("requesting img " + name)
-                        $('<img>')
+                        console.info("requesting img " + name)
+                        var img = $('<img>')
                             .attr('src', path)
-                            .load(function(source) {
-                                count -= 1;
-                                console.info("done img " + name);
-                                data[name] = new framework.Texture()
-                                    .image(this)
-                                    .repeat()
-                                    .mipmap();
-                                if(count == 0){
-                                    console.info("framework <img> ready");
-                                    self.events.dispatch('ready', data);
+                            .on('load', function() {
+                                if (!this.complete) {
+                                    alert('broken image!');
+                                } else {
+                                    count -= 1;
+                                    console.info("done img " + name);
+                                    data[name] = new framework.Texture()
+                                        .image(this)
+                                        .repeat()
+                                        .mipmap();
+                                    if(count == 0){
+                                        console.info("framework <img> ready");
+                                        self.events.dispatch('ready', data);
+                                    }
                                 }
                             });
                        break;
                     case 'shader': 
-                   		console.info("requesting shader " + name)
+                        console.info("requesting shader " + name)
                         $.get(path, function(source){
 /*
                             try{
@@ -76,9 +80,9 @@ Framework.components.push(function(framework, gl){
                             });
                         break;
                     default:
-                     	console.info("unknown file type "+ extension);
-                    	count--;
-                    	break;
+                        console.info("unknown file type "+ extension);
+                        count--;
+                        break;
                 }
             });
             return this;
