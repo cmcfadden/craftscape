@@ -25,29 +25,30 @@ Framework.components.push(function(framework, gl){
 
                 switch(extension){
                     case 'jpg': case 'png':
+                    	console.info("requesting " + path);
                         loadImage(
 						    path,
 							function (img) {
-								console.info("got image" + name);
-							},
-						);
-
-                        $('<img>')
-                            .load(function(){
+								console.info("got image" + path);
                                 count -= 1;
-                                console.info("img " + name)
                                 data[name] = new framework.Texture()
-                                    .image(this)
+                                    .image(img)
                                     .repeat()
                                     .mipmap();
                                 if(count == 0){
                                     console.info("framework <img> ready");
                                     self.events.dispatch('ready', data);
                                 }
-                            })
-                            .attr('src', path);
+							},
+						);
+
+                        //$('<img>')
+                        //    .load(function(){
+                        //    })
+                        //    .attr('src', path);
                         break;
-                    case 'shader': 
+                    case 'shader':
+                    	console.info("requesting " + path);
                         $.get(path, function(source){
 /*
                             try{
@@ -79,9 +80,6 @@ Framework.components.push(function(framework, gl){
                                     self.events.dispatch('error', error);
                                 }
                             })
-                            .always(function(data) {
-                                console.info("always");
-                            });
                         break;
                 }
             });
