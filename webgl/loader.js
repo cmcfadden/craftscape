@@ -28,7 +28,7 @@ Framework.components.push(function(framework, gl){
                    		console.info("requesting img " + name)
                         $('<img>')
                             .attr('src', path)
-                            .on("load",function() {
+                            .load(function(source) {
                                 count -= 1;
                                 console.info("done img " + name);
                                 data[name] = new framework.Texture()
@@ -73,9 +73,6 @@ Framework.components.push(function(framework, gl){
                                 catch(error){
                                     self.events.dispatch('error', error);
                                 }
-                            })
-                            .always(function(data) {
-                                console.info("always " + path);
                             });
                         break;
                     default:
