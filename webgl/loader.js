@@ -18,9 +18,9 @@ Framework.components.push(function(framework, gl){
         },
         load: function(data){
             var self = this;
-            var count = 0;
+            var count = Object.keys(data).length
             $.each(data, function(name, path){
-                count += 1;
+                //count += 1;
                 var extension = path.match(extre)[1];
 
                 switch(extension){
