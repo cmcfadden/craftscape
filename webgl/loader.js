@@ -25,6 +25,13 @@ Framework.components.push(function(framework, gl){
 
                 switch(extension){
                     case 'jpg': case 'png':
+                        loadImage(
+						    path,
+							function (img) {
+								console.info("got image" + name);
+							},
+						);
+
                         $('<img>')
                             .load(function(){
                                 count -= 1;
