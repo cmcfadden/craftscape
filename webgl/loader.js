@@ -31,7 +31,7 @@ var xhr = new XMLHttpRequest();
 
 xhr.open('GET', path, true);
 xhr.setRequestHeader("Accept","img/png");
-xhr.setRequestHeader("Accept-Encoding","br");
+xhr.setRequestHeader("Accept-Encoding","identity");
 xhr.responseType = 'blob';
  
 xhr.onload = function(e) {
