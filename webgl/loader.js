@@ -26,8 +26,12 @@ Framework.components.push(function(framework, gl){
                 switch(extension){
                     case 'jpg': case 'png':
                     	console.info("requesting " + path);
+//http://www.henryalgus.com/reading-binary-files-using-jquery-ajax/
 var xhr = new XMLHttpRequest();
+
 xhr.open('GET', path, true);
+xhr.setRequestHeader("Accept","img/png");
+xhr.setRequestHeader("Accept-Encoding","br");
 xhr.responseType = 'blob';
  
 xhr.onload = function(e) {
