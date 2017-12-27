@@ -406,7 +406,7 @@ $(function(){
         shadow: './shadow.shader',
         shadowmap: './shadowmap.shader',
         blur: './blur.shader',
-        rock: './rock_texture2.png',
+        rock: './rock_texture.jpg',
         rock_normals: './rock2_normals.png',
         grass: './grass_material.png',
         grass_normals: './grass_normals.png',

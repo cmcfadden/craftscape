@@ -30,7 +30,7 @@ Framework.components.push(function(framework, gl){
 var xhr = new XMLHttpRequest();
 
 xhr.open('GET', path, true);
-xhr.setRequestHeader("Accept","img/png");
+//xhr.setRequestHeader("Accept","img/png");
 xhr.setRequestHeader("Accept-Encoding","identity");
 xhr.responseType = 'blob';
  
