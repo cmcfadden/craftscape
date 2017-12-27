@@ -407,9 +407,9 @@ $(function(){
         shadowmap: './shadowmap.shader',
         blur: './blur.shader',
         rock: './rock_texture.jpg',
-        rock_normals: './rock2_normals.png',
-        grass: './grass_material.png',
-        grass_normals: './grass_normals.png',
+        rock_normals: './rock2_normals.jpg',
+        grass: './grass_material.jpg',
+        grass_normals: './grass_normals.jpg',
 
         water_diffuse: './water/diffuse.shader',
         water_display: './water/display.shader',
