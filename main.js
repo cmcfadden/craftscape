@@ -199,6 +199,7 @@ var Terrain = Class({
         this.heights.run(this.programs.diffuse_soil);
 
         if(keys.space && (controls.soil || controls.rock)){
+            this.programs.copy.set('source', this.heights.result);
             this.programs.god
                 .set(view)
                 .set(projection)
